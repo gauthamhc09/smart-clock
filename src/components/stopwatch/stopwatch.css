@@ -1,0 +1,8 @@
+.stopwatch_history {
+  display: flex;
+  justify-content: space-evenly;
+}
+
+.stopwatch_history span {
+  font-weight: 700;
+}
