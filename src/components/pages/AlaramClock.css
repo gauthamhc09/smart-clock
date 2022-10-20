@@ -1,0 +1,15 @@
+.digital_clock .ant-card-body {
+  display: flex;
+  align-items: flex-end;
+  justify-content: center;
+}
+
+.digital_clock .ant-card {
+  margin: 0 auto;
+}
+.digital_clock .ant-card-body .ant-card-grid {
+  width: 100%;
+  display: flex;
+  align-items: baseline;
+  justify-content: center;
+}

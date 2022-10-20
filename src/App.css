@@ -10,8 +10,3 @@
   margin: 0 auto;
 }
 
-.digital_clock .ant-card-body {
-  display: flex;
-  align-items: flex-end;
-  justify-content: center;
-}

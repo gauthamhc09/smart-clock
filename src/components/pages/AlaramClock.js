@@ -4,6 +4,7 @@ import months from "../../utlis/data";
 import Sound from "../../utlis/Sound/mixkit-casino-win-alarm-and-coins-1990.mp3";
 import AlarmOption from "../alaram/AlarmOption";
 import { Card, Col, Row } from "antd";
+import "./AlaramClock.css";
 
 export const alarm = new Audio(Sound);
 const AlaramClock = () => {
@@ -60,7 +61,7 @@ const AlaramClock = () => {
     <div className="alarm_clock">
       <Card title="Alarm Clock">
         <Row>
-          <Col span={24} style={{ margin: "0 auto" }}>
+          <Col span={24}>
             <DigitalClock
               hourDigital={hourDigital}
               minutesDigital={minutesDigital}
