@@ -1,70 +1,105 @@
-import { Button, Col, Row } from "antd";
-import { ArrowUpOutlined } from "@ant-design/icons";
-import React, { useState, useEffect } from "react";
+import { ArrowDownOutlined, ArrowUpOutlined } from "@ant-design/icons";
+import { Button, Col, Input, Row } from "antd";
+import React, { useRef, useState } from "react";
 
-const Timer = ({ duration }) => {
+const Timer = ({ duration, setHours, setMinutes, setSeconds }) => {
   const [time, setTime] = useState(duration);
+  const inputHourRef = useRef();
+  const inputMinutesRef = useRef();
+  const inputSecondsRef = useRef();
 
-  useEffect(() => {
-    setTimeout(() => {
+  const handleStart = () => {
+    console.log("time", time);
+    setHours(inputHourRef.current.value);
+    setMinutes(inputMinutesRef.current.value);
+    setSeconds(inputSecondsRef.current.value);
+    setInterval(() => {
       setTime(time - 1000);
     }, 1000);
-  }, [time]);
+  };
 
+  const handleResume = () => {};
+
+  const handleReset = () => {};
+
+  // useEffect(() => {
+  //   setTimeout(() => {
+  //     setTime(time - 1000);
+  //   }, 1000);
+  // }, [time]);
+  // console.log(hours, minutes, seconds);
   const getFormattedTime = (milliSeconds) => {
     let totalSeconds = parseInt(Math.floor(milliSeconds / 1000));
     let totalMinutes = parseInt(Math.floor(totalSeconds / 60));
     let totalHours = parseInt(Math.floor(totalMinutes / 60));
-    let days = parseInt(Math.floor(totalHours / 60));
+    // let days = parseInt(Math.floor(totalHours / 60));
 
     let seconds = parseInt(totalSeconds % 60);
     let minutes = parseInt(totalMinutes % 60);
     let hours = parseInt(totalHours % 60);
 
-    const style = {
-      background: "#0092ff",
-      padding: "8px 0",
-    };
     return (
-      <div>
-        <Row gutter={8}>
-          <Col xs={3}>
-            <Button>
-              <ArrowUpOutlined color="black" />
-            </Button>
-          </Col>
-          <Col xs={3}>
-            <Button>
-              <ArrowUpOutlined color="black" />
-            </Button>
-          </Col>
-          <Col xs={3}>
-            <Button>
-              <ArrowUpOutlined color="black" />
-            </Button>
-          </Col>
-          <Col xs={3}>
-            <Button>
-              <ArrowUpOutlined color="black" />
-            </Button>
-          </Col>
-        </Row>
-        <Row gutter={12}>
-          <Col xs={3}>
-            <div style={style}>{days}</div>
-          </Col>
-          <Col xs={3}>
-            <div style={style}>{hours}</div>
-          </Col>
-          <Col xs={3}>
-            <div style={style}>{minutes}</div>
-          </Col>
-          <Col xs={3}>
-            <div style={style}>{seconds}</div>
-          </Col>
-        </Row>
-        <Button type="primary">Start</Button>
-      </div>
+      <Row>
+        <div>
+          <Row gutter={8}>
+            <Col xs={3}>
+              <Button style={{ width: "-webkit-fill-available" }}>
+                <ArrowUpOutlined color="black" />
+              </Button>
+            </Col>
+            <Col xs={3}>
+              <Button style={{ width: "-webkit-fill-available" }}>
+                <ArrowUpOutlined color="black" />
+              </Button>
+            </Col>
+            <Col xs={3}>
+              <Button style={{ width: "-webkit-fill-available" }}>
+                <ArrowUpOutlined color="black" />
+              </Button>
+            </Col>
+          </Row>
+          <Row gutter={8} style={{ marginTop: "16px", marginBottom: "16px" }}>
+            <Col xs={3}>
+              <Input
+                value={hours}
+                ref={inputHourRef}
+                type="number"
+                textAlign="center"
+              />
+            </Col>
+            <Col xs={3}>
+              <Input value={minutes} ref={inputMinutesRef} type="number" />
+            </Col>
+            <Col xs={3}>
+              <Input value={seconds} ref={inputSecondsRef} type="number" />
+            </Col>
+          </Row>
+          <Row gutter={8}>
+            <Col xs={3}>
+              <Button style={{ width: "-webkit-fill-available" }}>
+                <ArrowDownOutlined color="black" />
+              </Button>
+            </Col>
+            <Col xs={3}>
+              <Button style={{ width: "-webkit-fill-available" }}>
+                <ArrowDownOutlined color="black" />
+              </Button>
+            </Col>
+            <Col xs={3}>
+              <Button style={{ width: "-webkit-fill-available" }}>
+                <ArrowDownOutlined color="black" />
+              </Button>
+            </Col>
+          </Row>
+        </div>
+        <Button
+          type="primary"
+          onClick={handleStart}
+          style={{ marginTop: "20px" }}
+        >
+          Start
+        </Button>
+      </Row>
     );
   };
   return <div>{getFormattedTime(time)}</div>;

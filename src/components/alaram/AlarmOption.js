@@ -1,14 +1,22 @@
-import React from "react";
-// import "./AlarmOption.css";
-import useSelect from "../../hooks/useSelect";
+import { Button, Select } from "antd";
+import React, { useState } from "react";
 import { hourNumber, minutesNumber } from "../../utlis/func";
 
-function AlarmOption({ setAlarmTime, hasAlarm, setHasAlarm, pauseAlarm }) {
-  const [hour, setHour] = useSelect("Hour");
-  const [minutes, setMinutes] = useSelect("Minutes");
-  const [amPmOption, setAmPmOption] = useSelect("Am-Pm");
+function AlarmOption({
+  setAlarmTime,
+  hasAlarm,
+  setHasAlarm,
+  pauseAlarm,
+  setStoreAlarm,
+}) {
+  const [hour, setHour] = useState("Hour");
+  const [minutes, setMinutes] = useState("Minutes");
+  const [amPmOption, setAmPmOption] = useState("Am-Pm");
 
   const setAlarm = () => {
+    const hourNum = hour.toString();
+    const minutesNum = minutes.toString();
+
     if (hasAlarm) {
       pauseAlarm();
       setHasAlarm(false);
@@ -16,52 +24,90 @@ function AlarmOption({ setAlarmTime, hasAlarm, setHasAlarm, pauseAlarm }) {
     }
 
     if (
-      !hour.includes("Hour") &&
-      !minutes.includes("Minutes") &&
+      !hourNum.includes("Hour") &&
+      !minutesNum.includes("Minutes") &&
       !amPmOption.includes("Am-Pm")
     ) {
       setHasAlarm(true);
-      setAlarmTime(`${hour}:${minutes} ${amPmOption}`);
+      setAlarmTime(`${hourNum}:${minutesNum} ${amPmOption}`);
+      setStoreAlarm((prevAlarm) => {
+        return [...prevAlarm, `${hourNum}:${minutesNum} ${amPmOption}`];
+      });
     }
+  };
+
+  const { Option } = Select;
+  const hourChange = (value) => {
+    setHour(value);
+  };
+  const minutesChange = (value) => {
+    setMinutes(value);
+  };
+  const amPmChange = (value) => {
+    setAmPmOption(value);
   };
 
   return (
     <div className="option-Container">
       <div className={`wrapper-option ${hasAlarm && "disable"}`}>
-        <select {...setHour}>
-          <option disabled value="Hour">
+        <Select
+          defaultValue="Hour"
+          style={{
+            width: 100,
+          }}
+          value={hour}
+          onChange={hourChange}
+        >
+          <Option disabled value="Hour">
             Hour
-          </option>
+          </Option>
           {hourNumber.map((hour, index) => (
-            <option key={index} value={hour}>
+            <Option key={index} value={hour}>
               {hour}
-            </option>
+            </Option>
           ))}
-        </select>
-        <select {...setMinutes}>
-          <option disabled value="Minutes">
+        </Select>
+        <Select
+          defaultValue="Minutes"
+          style={{
+            width: 100,
+          }}
+          value={minutes}
+          onChange={minutesChange}
+        >
+          <Option disabled value="Minutes">
             Minutes
-          </option>
+          </Option>
           {minutesNumber.map((minutes, index) => (
-            <option key={index} value={minutes}>
+            <Option key={index} value={minutes}>
               {minutes}
-            </option>
+            </Option>
           ))}
-        </select>
-        <select {...setAmPmOption}>
-          <option disabled value="Am-Pm">
+        </Select>
+        <Select
+          defaultValue="Am-Pm"
+          style={{
+            width: 100,
+          }}
+          value={amPmOption}
+          onChange={amPmChange}
+        >
+          <Option disabled value="Am-Pm">
             Am/Pm
-          </option>
-          <option value="AM">Am</option>
-          <option value="PM">Pm</option>
-        </select>
+          </Option>
+          <Option value="AM">Am</Option>
+          <Option value="PM">Pm</Option>
+        </Select>
       </div>
-      <button
+      <Button
         onClick={setAlarm}
+        size="large"
         className={`setAlarm-btn ${hasAlarm && "play"}`}
+        type={hasAlarm ? "danger" : "primary"}
+        style={{ marginTop: "20px" }}
       >
         {hasAlarm ? "Clear Alarm" : "Set Alarm"}
-      </button>
+      </Button>
     </div>
   );
 }

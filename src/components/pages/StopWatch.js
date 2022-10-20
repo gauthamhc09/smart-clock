@@ -1,4 +1,4 @@
-import { Col, Row } from "antd";
+import { Card, Col, Row, Typography } from "antd";
 import React, { useState } from "react";
 import ButtonComponent from "../stopwatch/ButtonComponent";
 import DisplayComponent from "../stopwatch/DisplayComponent";
@@ -71,39 +71,35 @@ const StopWatch = () => {
   const resume = () => start();
   return (
     <div className="stopwatch">
-      <h1
-        style={{
-          textAlign: "center",
-          textDecoration: "underline",
-          color: "1890ff",
-        }}
-      >
-        StopWatch
-      </h1>
-      <Row>
-        <Col style={{ backgroundColor: "aqua" }} span={16}>
-          <div className="stopwatch-machine">
-            <DisplayComponent time={time} />
-            <ButtonComponent
-              start={start}
-              resume={resume}
-              reset={reset}
-              stop={stop}
-              status={status}
-            />
-          </div>
-        </Col>
-        <Col
-          style={{
-            backgroundColor: "lightgreen",
-            maxHeight: "60vh",
-            overflowY: "overlay",
-          }}
-          span={6}
-        >
-          <StopWatchHistory storeTime={storeTime} />
-        </Col>
-      </Row>
+      <Card title="StopWatch">
+        <Row>
+          <Col xs={24} sm={16}>
+            <div className="stopwatch-machine">
+              <DisplayComponent time={time} />
+              <ButtonComponent
+                start={start}
+                resume={resume}
+                reset={reset}
+                stop={stop}
+                status={status}
+              />
+            </div>
+          </Col>
+          {storeTime.length > 0 && (
+            <Col
+              xs={24}
+              sm={6}
+              style={{
+                backgroundColor: "lightgreen",
+                maxHeight: "47vh",
+                overflowY: "overlay",
+              }}
+            >
+              <StopWatchHistory storeTime={storeTime} />
+            </Col>
+          )}
+        </Row>
+      </Card>
     </div>
   );
 };

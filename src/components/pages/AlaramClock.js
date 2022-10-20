@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from "react";
-import DigitalClock from "../alaram/digitclock/DigitalClock";
+import { Card, Col, Row } from "antd";
+import React, { useEffect, useState } from "react";
 import months from "../../utlis/data";
 import Sound from "../../utlis/Sound/mixkit-casino-win-alarm-and-coins-1990.mp3";
+import AlaramHistory from "../alaram/AlaramHistory";
 import AlarmOption from "../alaram/AlarmOption";
-import { Card, Col, Row } from "antd";
+import DigitalClock from "../alaram/digitclock/DigitalClock";
 import "./AlaramClock.css";
 
 export const alarm = new Audio(Sound);
@@ -16,7 +17,9 @@ const AlaramClock = () => {
   const [yearNow, setYearNow] = useState("");
   const [alarmTime, setAlarmTime] = useState("");
   const [hasAlarm, setHasAlarm] = useState(false);
+  const [storeAlarm, setStoreAlarm] = useState(["00:00:00"]);
 
+  console.log("storeAlarm", storeAlarm);
   useEffect(() => {
     setInterval(() => {
       let date = new Date();
@@ -61,7 +64,7 @@ const AlaramClock = () => {
     <div className="alarm_clock">
       <Card title="Alarm Clock">
         <Row>
-          <Col span={24}>
+          <Col xs={24} sm={16}>
             <DigitalClock
               hourDigital={hourDigital}
               minutesDigital={minutesDigital}
@@ -76,8 +79,14 @@ const AlaramClock = () => {
               hasAlarm={hasAlarm}
               setHasAlarm={setHasAlarm}
               pauseAlarm={pauseAlarm}
+              setStoreAlarm={setStoreAlarm}
             />
           </Col>
+          {storeAlarm.length > 1 && (
+            <Col>
+              <AlaramHistory storeAlarm={storeAlarm} />
+            </Col>
+          )}
         </Row>
       </Card>
     </div>

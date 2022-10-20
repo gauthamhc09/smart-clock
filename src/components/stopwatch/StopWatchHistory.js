@@ -1,21 +1,25 @@
+import { Col, Row, Typography } from "antd";
 import React from "react";
 
+const { Title } = Typography;
 const StopWatchHistory = ({ storeTime }) => {
   return (
     <>
-      <h4>StopWatch History</h4>
+      <Title level={4} style={{ textAlign: "center" }}>
+        StopWatch History
+      </Title>
       {storeTime.length > 0 &&
         storeTime.map((time) => {
           const { milliSeconds, seconds, minutes, hours } = time;
           return (
-            <div className="stopwatch_history">
-              <span>{hours >= 10 ? hours : "0" + hours}</span>:
-              <span>{minutes >= 10 ? minutes : "0" + minutes}</span>:
-              <span>{seconds >= 10 ? seconds : "0" + seconds}</span>:
-              <span>
+            <Row className="stopwatch_history">
+              <Col>
+                {hours >= 10 ? hours : "0" + hours}:&nbsp;
+                {minutes >= 10 ? minutes : "0" + minutes}:&nbsp;
+                {seconds >= 10 ? seconds : "0" + seconds}:&nbsp;
                 {milliSeconds >= 10 ? milliSeconds : "0" + milliSeconds}
-              </span>
-            </div>
+              </Col>
+            </Row>
           );
         })}
     </>
