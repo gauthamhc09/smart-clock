@@ -13,7 +13,6 @@ const StopWatch = () => {
     hours: 0,
   });
   const [storeTime, setStoreTime] = useState([]);
-  console.log("storeTime", storeTime);
   const [interv, setInterv] = useState();
   const [status, setStatus] = useState(0);
 
@@ -81,16 +80,7 @@ const StopWatch = () => {
       >
         StopWatch
       </h1>
-      <Row
-        gutter={[24, 16]}
-        style={{
-          maxWidth: "780px",
-          marginTop: "0",
-          marginBottom: "0",
-          marginLeft: "auto",
-          marginRight: "auto",
-        }}
-      >
+      <Row>
         <Col style={{ backgroundColor: "aqua" }} span={16}>
           <div className="stopwatch-machine">
             <DisplayComponent time={time} />

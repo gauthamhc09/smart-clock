@@ -1,14 +1,14 @@
 import React from "react";
-import Alaram from "../components/pages/Alaram";
-import Countdown from "../components/pages/Countdown";
+import AlaramClock from "../components/pages/AlaramClock";
+import CountdownTimer from "../components/pages/CountdownTimer";
 import StopWatch from "../components/pages/StopWatch";
 
 const Home = () => {
   return (
     <div>
       <StopWatch />
-      <Countdown />
-      <Alaram />
+      <CountdownTimer />
+      <AlaramClock />
     </div>
   );
 };

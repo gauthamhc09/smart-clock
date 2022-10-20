@@ -17,7 +17,7 @@ const ButtonComponent = ({ start, status, resume, stop, reset }) => {
         ""
       )}
       {status === 1 ? (
-        <div>
+        <div style={{ display: "flex", gap: "16px" }}>
           <Button
             type="primary"
             size="large"
@@ -40,7 +40,7 @@ const ButtonComponent = ({ start, status, resume, stop, reset }) => {
       )}
 
       {status === 2 ? (
-        <div>
+        <div style={{ display: "flex", gap: "16px" }}>
           <Button
             type="primary"
             size="large"
