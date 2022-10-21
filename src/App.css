@@ -11,7 +11,7 @@
 .alarm_clock {
   max-width: 600px;
   width: 100%;
-  margin: 0 auto;
+  margin: 60px auto;
 }
 
 .stopwatch .ant-card-head-title,
@@ -19,4 +19,11 @@
 .alarm_clock .ant-card-head-title,
 .countdown_timer .ant-input {
   text-align: center;
+}
+
+.stopwatch .ant-card-head,
+.countdown_timer .ant-card-head,
+.alarm_clock .ant-card-head {
+  background-color: #002140;
+  color: #ffffff;
 }

@@ -90,7 +90,9 @@ const StopWatch = () => {
               xs={24}
               sm={6}
               style={{
-                backgroundColor: "lightgreen",
+                backgroundColor: "#3B597F",
+                color: "#ffffff",
+                fontWeight: "500",
                 maxHeight: "47vh",
                 overflowY: "overlay",
               }}

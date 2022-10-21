@@ -8,7 +8,7 @@ import DigitalClock from "../alaram/digitclock/DigitalClock";
 import "./AlaramClock.css";
 
 export const alarm = new Audio(Sound);
-const AlaramClock = () => {
+const AlarmClock = () => {
   const [hourDigital, setHourDigital] = useState("");
   const [minutesDigital, setMinutesDigital] = useState("");
   const [amPm, setAmPm] = useState("");
@@ -93,4 +93,4 @@ const AlaramClock = () => {
   );
 };
 
-export default AlaramClock;
+export default AlarmClock;

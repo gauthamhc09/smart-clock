@@ -1,5 +1,5 @@
 import React from "react";
-import AlaramClock from "../components/pages/AlaramClock";
+import AlaramClock from "../components/pages/AlarmClock";
 import CountdownTimer from "../components/pages/CountdownTimer";
 import StopWatch from "../components/pages/StopWatch";
 

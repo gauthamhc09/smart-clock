@@ -5,7 +5,7 @@ const { Title } = Typography;
 const StopWatchHistory = ({ storeTime }) => {
   return (
     <>
-      <Title level={4} style={{ textAlign: "center" }}>
+      <Title level={5} style={{ textAlign: "center", color: "#ffffff" }}>
         StopWatch History
       </Title>
       {storeTime.length > 0 &&

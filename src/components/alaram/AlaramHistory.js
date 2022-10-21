@@ -12,7 +12,7 @@ const AlaramHistory = ({ storeAlarm }) => {
   }, [storeAlarm]);
   return (
     <div className="alarm_history">
-      <Title level={4}>Alaram History</Title>
+      <Title level={4}>Alarm History</Title>
       {storeAlarm.map((time) => {
         if (time !== "00:00:00") {
           return <p>{time}</p>;
