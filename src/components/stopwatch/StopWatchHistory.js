@@ -17,7 +17,7 @@ const StopWatchHistory = ({ storeTime, setStoreTime }) => {
       </div>
 
       {storeTime.length > 0 &&
-        storeTime.map((time, index) => {
+        Array.from(storeTime).map((time, index) => {
           const { milliSeconds, seconds, minutes, hours } = time;
           return (
             <Row className="stopwatch_history" key={index}>
