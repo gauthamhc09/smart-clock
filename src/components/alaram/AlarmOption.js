@@ -30,8 +30,8 @@ function AlarmOption({
     ) {
       setHasAlarm(true);
       setAlarmTime(`${hourNum}:${minutesNum} ${amPmOption}`);
-      setStoreAlarm((prevAlarm) => {
-        return [...prevAlarm, `${hourNum}:${minutesNum} ${amPmOption}`];
+      setStoreAlarm((prevAalarm) => {
+        return [...prevAalarm, `${hourNum}:${minutesNum} ${amPmOption}`];
       });
     }
   };

@@ -1,14 +1,37 @@
 import React from "react";
-import AlaramClock from "../components/pages/AlarmClock";
+import { BrowserRouter as Router, Route, Switch } from "react-router-dom";
+import AlarmClock from "../components/pages/AlarmClock";
 import CountdownTimer from "../components/pages/CountdownTimer";
 import StopWatch from "../components/pages/StopWatch";
 
 const Home = () => {
   return (
     <div>
-      <StopWatch />
-      <CountdownTimer />
-      <AlaramClock />
+      <Router>
+        <Switch>
+          <Route
+            exact
+            path="/"
+            render={() => {
+              return <StopWatch />;
+            }}
+          />
+          <Route
+            exact
+            path="/alarm-clock"
+            render={() => {
+              return <AlarmClock />;
+            }}
+          />
+          <Route
+            exact
+            path="/timer"
+            render={() => {
+              return <CountdownTimer />;
+            }}
+          />
+        </Switch>
+      </Router>
     </div>
   );
 };

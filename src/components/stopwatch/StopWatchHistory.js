@@ -1,18 +1,26 @@
-import { Col, Row, Typography } from "antd";
+import { Button, Col, Row, Typography } from "antd";
 import React from "react";
 
 const { Title } = Typography;
-const StopWatchHistory = ({ storeTime }) => {
+const StopWatchHistory = ({ storeTime, setStoreTime }) => {
   return (
     <>
-      <Title level={5} style={{ textAlign: "center", color: "#ffffff" }}>
-        StopWatch History
-      </Title>
+      <div style={{ display: "flex", flexDirection: "column" }}>
+        <Title level={5} style={{ textAlign: "center", color: "#ffffff" }}>
+          StopWatch History
+        </Title>
+        {storeTime ? (
+          <Button danger onClick={() => setStoreTime([])}>
+            Clear
+          </Button>
+        ) : null}
+      </div>
+
       {storeTime.length > 0 &&
-        storeTime.map((time) => {
+        storeTime.map((time, index) => {
           const { milliSeconds, seconds, minutes, hours } = time;
           return (
-            <Row className="stopwatch_history">
+            <Row className="stopwatch_history" key={index}>
               <Col>
                 {hours >= 10 ? hours : "0" + hours}:&nbsp;
                 {minutes >= 10 ? minutes : "0" + minutes}:&nbsp;

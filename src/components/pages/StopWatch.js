@@ -1,9 +1,9 @@
-import { Card, Col, Row, Typography } from "antd";
-import React, { useState } from "react";
+import { Card, Col, Row } from "antd";
+import React, { useEffect, useState } from "react";
 import ButtonComponent from "../stopwatch/ButtonComponent";
 import DisplayComponent from "../stopwatch/DisplayComponent";
-import StopWatchHistory from "../stopwatch/StopWatchHistory";
 import "../stopwatch/stopwatch.css";
+import StopWatchHistory from "../stopwatch/StopWatchHistory";
 
 const StopWatch = () => {
   const [time, setTime] = useState({
@@ -12,14 +12,23 @@ const StopWatch = () => {
     minutes: 0,
     hours: 0,
   });
-  const [storeTime, setStoreTime] = useState([]);
+  const [storeTime, setStoreTime] = useState(getStopWatchLocaleStorage());
   const [interv, setInterv] = useState();
   const [status, setStatus] = useState(0);
 
-  const populateStorage = (storeTime) => {
-    const updatedTime = JSON.stringify(storeTime);
-    localStorage.setItem("time", JSON.stringify(updatedTime));
-  };
+  useEffect(() => {
+    localStorage.setItem("time", JSON.stringify(storeTime));
+  }, [storeTime]);
+
+  function getStopWatchLocaleStorage() {
+    let list = localStorage.getItem("time");
+    if (list) {
+      return JSON.parse(localStorage.getItem("time"));
+    } else {
+      return [];
+    }
+  }
+
   const start = () => {
     run();
     setStatus(1);
@@ -59,7 +68,6 @@ const StopWatch = () => {
     setStoreTime((prevTime) => {
       return [...prevTime, time];
     });
-    populateStorage(storeTime);
   };
 
   const reset = () => {
@@ -97,7 +105,10 @@ const StopWatch = () => {
                 overflowY: "overlay",
               }}
             >
-              <StopWatchHistory storeTime={storeTime} />
+              <StopWatchHistory
+                storeTime={storeTime}
+                setStoreTime={setStoreTime}
+              />
             </Col>
           )}
         </Row>

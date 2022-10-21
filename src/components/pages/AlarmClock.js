@@ -2,10 +2,10 @@ import { Card, Col, Row } from "antd";
 import React, { useEffect, useState } from "react";
 import months from "../../utlis/data";
 import Sound from "../../utlis/Sound/mixkit-casino-win-alarm-and-coins-1990.mp3";
-import AlaramHistory from "../alaram/AlaramHistory";
+import AlarmHistory from "../alaram/AlarmHistory";
 import AlarmOption from "../alaram/AlarmOption";
 import DigitalClock from "../alaram/digitclock/DigitalClock";
-import "./AlaramClock.css";
+import "./AlarmClock.css";
 
 export const alarm = new Audio(Sound);
 const AlarmClock = () => {
@@ -17,9 +17,7 @@ const AlarmClock = () => {
   const [yearNow, setYearNow] = useState("");
   const [alarmTime, setAlarmTime] = useState("");
   const [hasAlarm, setHasAlarm] = useState(false);
-  const [storeAlarm, setStoreAlarm] = useState(["00:00:00"]);
-
-  console.log("storeAlarm", storeAlarm);
+  const [storeAlarm, setStoreAlarm] = useState(getAlarmLocalStorage());
   useEffect(() => {
     setInterval(() => {
       let date = new Date();
@@ -50,6 +48,19 @@ const AlarmClock = () => {
       setYearNow(year);
     }, 1000);
   }, []);
+
+  useEffect(() => {
+    localStorage.setItem("alarm", JSON.stringify(storeAlarm));
+  }, [storeAlarm]);
+
+  function getAlarmLocalStorage() {
+    let list = localStorage.getItem("alarm");
+    if (list) {
+      return JSON.parse(localStorage.getItem("alarm"));
+    } else {
+      return [];
+    }
+  }
 
   if (alarmTime === `${hourDigital}:${minutesDigital} ${amPm}`) {
     alarm.play();
@@ -82,9 +93,12 @@ const AlarmClock = () => {
               setStoreAlarm={setStoreAlarm}
             />
           </Col>
-          {storeAlarm.length > 1 && (
+          {storeAlarm.length > 0 && (
             <Col>
-              <AlaramHistory storeAlarm={storeAlarm} />
+              <AlarmHistory
+                storeAlarm={storeAlarm}
+                setStoreAlarm={setStoreAlarm}
+              />
             </Col>
           )}
         </Row>
