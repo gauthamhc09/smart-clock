@@ -1,30 +1,27 @@
 import React, { useState } from "react";
 import { Menu } from "antd";
-import { BrowserRouter as Router, Link, useHistory } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 const AppHeader = () => {
-  let history = useHistory();
-  // console.log("history", history);
+  const [current, setCurrent] = useState("stopWatch");
   const items = [
     { label: <Link to="/">Stop watch</Link>, key: "stopWatch" },
-    { label: <Link to="/timer">Timer</Link>, key: "timer" },
+
     { label: <Link to="/alarm-clock">Alarm Clock</Link>, key: "alarm-clock" },
+    { label: <Link to="/timer">Timer</Link>, key: "timer" },
   ];
-  const [current, setCurrent] = useState("stopWatch");
+
   return (
     <div className="app_header">
-      <Router>
-        <Menu
-          mode="horizontal"
-          theme="dark"
-          items={items}
-          selectedKeys={current}
-          onClick={(e) => {
-            setCurrent(e.key);            
-            // history.push(`/${e.key}`);
-          }}
-        />
-      </Router>
+      <Menu
+        mode="horizontal"
+        theme="dark"
+        items={items}
+        selectedKeys={current}
+        onClick={(e) => {
+          setCurrent(e.key);
+        }}
+      />
     </div>
   );
 };
